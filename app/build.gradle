@@ -88,4 +88,8 @@ dependencies {
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"
 
+    //Koin
+    implementation "org.koin:koin-android:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
+
 }
