@@ -3,16 +3,19 @@ package com.udacity.nanodegree.politicalpreparedness.representative.adapter
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.politicalpreparedness.network.models.Channel
 import com.udacity.nanodegree.politicalpreparedness.R
+import com.udacity.nanodegree.politicalpreparedness.databinding.ItemViewRepresentativeBinding
+import com.udacity.nanodegree.politicalpreparedness.network.models.Channel
 import com.udacity.nanodegree.politicalpreparedness.representative.model.Representative
 
-class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback()){
+class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         return RepresentativeViewHolder.from(parent)
@@ -24,7 +27,15 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewH
     }
 }
 
-class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
+class RepresentativeViewHolder(val binding: ItemViewRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
+    companion object {
+        fun from(parent: ViewGroup): RepresentativeViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ItemViewRepresentativeBinding.inflate(layoutInflater, parent, false)
+
+            return RepresentativeViewHolder(binding)
+        }
+    }
 
     fun bind(item: Representative) {
         binding.representative = item
@@ -75,6 +86,16 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): Re
 
 }
 
-//TODO: Create RepresentativeDiffCallback
+//Created RepresentativeDiffCallback
+object RepresentativeDiffCallback: DiffUtil.ItemCallback<Representative>() {
 
+    override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem.official.name == newItem.official.name
+    }
+
+    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem == newItem
+    }
+
+}
 //TODO: Create RepresentativeListener

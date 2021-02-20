@@ -1,7 +1,8 @@
 package com.udacity.nanodegree.politicalpreparedness.representative.model
 
-import com.example.android.politicalpreparedness.network.models.Office
-import com.example.android.politicalpreparedness.network.models.Official
+import com.udacity.nanodegree.politicalpreparedness.network.models.Office
+import com.udacity.nanodegree.politicalpreparedness.network.models.Official
+
 
 data class Representative (
         val official: Official,

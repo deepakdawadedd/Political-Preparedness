@@ -5,5 +5,16 @@
     <!-- TODO: Add necessary string values -->
     <string name="launch_fragment_upcoming_elections_text">Upcoming elections</string>
     <string name="launch_fragment_find_my_representatives">Find my representatives</string>
+    <!-- My Representative  -->
+    <string name="representative_search">Representative Search</string>
+    <string name="representative_fragment_address_line_1">Address line 1</string>
+    <string name="representative_fragment_address_line_2">Address line 2</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip">Zip</string>
+    <string name="representative_fragment_find_my_representatives">Find my representatives</string>
+    <string name="representative_fragment_use_my_location">Use my location</string>
+    <string name="representative_fragment_my_representative_title">My Representatives</string>
+    <string name="representative_fragment_empty_representative_placeholder">No Representatives</string>
 
 </resources>

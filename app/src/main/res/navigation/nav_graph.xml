@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/representativeFragment"
-        android:name="com.udacity.nanodegree.politicalpreparedness.representative.DetailFragment"
+        android:name="com.udacity.nanodegree.politicalpreparedness.representative.RepresentativeFragment"
         android:label="fragment_representative"
         tools:layout="@layout/fragment_representative" />
     <fragment
