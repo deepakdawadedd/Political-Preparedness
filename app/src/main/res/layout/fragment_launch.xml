@@ -22,27 +22,25 @@
 
 
         <!-- Added Button to navigate to upcoming elections. -->
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/launch_fragment_action_upcoming_election"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button_default_height"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin_small"
-            android:background="?colorPrimaryDark"
             android:text="@string/launch_fragment_upcoming_elections_text"
-            android:textColor="?colorOnPrimary"
             app:layout_constraintBottom_toTopOf="@id/launch_fragment_action_find_my_representatives"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Added Button to navigate to representatives. -->
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/launch_fragment_action_find_my_representatives"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button_default_height"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:background="?colorPrimaryDark"
+            android:layout_marginHorizontal="@dimen/default_margin"
             android:text="@string/launch_fragment_find_my_representatives"
-            android:textColor="?colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
