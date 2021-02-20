@@ -3,5 +3,7 @@
     <string name="app_name">Political Preparedness</string>
 
     <!-- TODO: Add necessary string values -->
+    <string name="launch_fragment_upcoming_elections_text">Upcoming elections</string>
+    <string name="launch_fragment_find_my_representatives">Find my representatives</string>
 
 </resources>

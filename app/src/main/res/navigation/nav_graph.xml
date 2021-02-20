@@ -10,7 +10,14 @@
         android:id="@+id/launchFragment"
         android:name="com.udacity.nanodegree.politicalpreparedness.launch.LaunchFragment"
         android:label="fragment_launch"
-        tools:layout="@layout/fragment_launch" />
+        tools:layout="@layout/fragment_launch">
+        <action
+            android:id="@+id/to_representativeFragment"
+            app:destination="@id/representativeFragment" />
+        <action
+            android:id="@+id/to_electionsFragment"
+            app:destination="@id/electionsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/representativeFragment"
@@ -27,7 +34,7 @@
             app:argType="integer" />
         <argument
             android:name="arg_division"
-            app:argType="com.example.android.politicalpreparedness.network.models.Division" />
+            app:argType="com.udacity.nanodegree.politicalpreparedness.network.models.Division" />
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"

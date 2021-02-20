@@ -3,5 +3,9 @@
     <dimen name="default_padding">8dp</dimen>
 
     <!-- TODO: Add necessary dimension values -->s
+    <dimen name="button_default_height">54dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_margin_small">8dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
 
 </resources>
