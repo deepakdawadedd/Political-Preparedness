@@ -8,7 +8,7 @@ import com.udacity.nanodegree.politicalpreparedness.util.SingleLiveEvent
 /**
  * Base class for View Models to declare the common LiveData objects in one place
  */
-abstract class BaseViewModel(app: Application) : AndroidViewModel(app) {
+abstract class BaseViewModel(protected val app: Application) : AndroidViewModel(app) {
 
     val navigationCommand: SingleLiveEvent<NavigationCommand> = SingleLiveEvent()
     val showErrorMessage: SingleLiveEvent<String> = SingleLiveEvent()

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/representativePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:profileImage="@{representative.official.photoUrl}"
             app:srcCompat="@drawable/ic_profile" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/officeName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="President of the United States" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/officialName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/officeName"
             tools:text="Joseph R. Biden" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/officialParty"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Democratic Party" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/wwwIcon"
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"
@@ -76,7 +76,7 @@
             app:srcCompat="@drawable/ic_www"
             tools:visibility="visible" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/facebookIcon"
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"
@@ -87,7 +87,7 @@
             app:srcCompat="@drawable/ic_facebook"
             tools:visibility="visible" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/twitterIcon"
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"

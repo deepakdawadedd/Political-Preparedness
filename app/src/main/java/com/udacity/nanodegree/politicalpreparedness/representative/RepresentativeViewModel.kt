@@ -1,15 +1,26 @@
 package com.udacity.nanodegree.politicalpreparedness.representative
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.udacity.nanodegree.politicalpreparedness.R
 import com.udacity.nanodegree.politicalpreparedness.base.BaseViewModel
+import com.udacity.nanodegree.politicalpreparedness.network.CivicsRepository
+import com.udacity.nanodegree.politicalpreparedness.network.Result
 import com.udacity.nanodegree.politicalpreparedness.network.models.Address
+import com.udacity.nanodegree.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.launch
 
-class RepresentativeViewModel(application: Application): BaseViewModel(application) {
+class RepresentativeViewModel(
+    application: Application,
+    private val repository: CivicsRepository
+) : BaseViewModel(application) {
 
     //Established live data for representatives and address
+    private val _representatives = MutableLiveData<List<Representative>>()
+    val representatives: LiveData<List<Representative>> get() = _representatives
+
     private val address = MutableLiveData<Address?>()
     val addressLine1 = MutableLiveData<String>()
     val addressLine2 = MutableLiveData<String>()
@@ -17,7 +28,26 @@ class RepresentativeViewModel(application: Application): BaseViewModel(applicati
     val state = MutableLiveData<String>()
     val zip = MutableLiveData<String>()
 
-    //TODO: Create function to fetch representatives from API from a provided address
+    //Created function to fetch representatives from API from a provided address
+    fun getRepresentativesFromAddress(address: Address) {
+        viewModelScope.launch {
+            showLoading.value = true
+            val result = repository.getRepresentatives(address)
+            when (result) {
+                is Result.Success -> {
+                    val data = result.data
+                    _representatives.postValue(data)
+                    showLoading.value = false
+                    showNoData.postValue(data.isEmpty())
+                }
+                is Result.Error -> {
+                    showSnackBar.value = app.getString(R.string.error_getting_representative)
+                    showLoading.value = false
+                }
+            }
+
+        }
+    }
 
     /**
      *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
@@ -30,28 +60,41 @@ class RepresentativeViewModel(application: Application): BaseViewModel(applicati
 
      */
 
-    //TODO: Create function get address from geo location
-    fun refreshRepresentatives(address: Address) {
+    //Created function get address from geo location
+    fun getAddressFromGeoLocation(address: Address) {
         this.address.value = address
         addressLine1.value = address.line1
         address.line2.let { addressLine2.value = it }
         city.value = address.city
         state.value = address.state
         zip.value = address.zip
-
-        viewModelScope.launch {
-//            repository.refreshRepresentatives(address.toFormattedString())
-        }
+        getRepresentativesFromAddress(address)
     }
-    //TODO: Create function to get address from individual fields
-    fun refreshRepresentatives() {
-        val addressLine1 = addressLine1.value ?: return
-        val city = city.value ?: return
-        val state = state.value ?: return
-        val zip = zip.value ?: return
+
+    //Created function to get address from individual fields
+    fun getRepresentatives() {
+        val addressLine1 = addressLine1.value ?: kotlin.run {
+            showSnackBarInt.value = R.string.error_enter_address_line1
+            return
+        }
+        val city = city.value ?: kotlin.run {
+            showSnackBarInt.value = R.string.error_enter_city
+            return
+        }
+
+        val state = state.value ?: kotlin.run {
+            showSnackBarInt.value = R.string.error_enter_state
+            return
+        }
+
+        val zip = zip.value ?: kotlin.run {
+            showSnackBarInt.value = R.string.error_enter_zip
+            return
+        }
+
 
         val address = Address(addressLine1, addressLine2.value, city, state, zip)
-        refreshRepresentatives(address)
+        getRepresentativesFromAddress(address)
     }
 
 

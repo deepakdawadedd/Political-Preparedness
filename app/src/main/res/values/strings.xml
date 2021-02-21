@@ -16,5 +16,12 @@
     <string name="representative_fragment_use_my_location">Use my location</string>
     <string name="representative_fragment_my_representative_title">My Representatives</string>
     <string name="representative_fragment_empty_representative_placeholder">No Representatives</string>
+    <string name="error_getting_representative">Error getting representatives</string>
+    <string name="error_enter_address_line1">Enter Address Line 1</string>
+    <string name="error_enter_city">Enter city</string>
+    <string name="error_enter_state">Enter state</string>
+    <string name="error_enter_zip">Enter zip</string>
+    <string name="error_can_not_find_representative_for_location">Cannot find representatives at this location</string>
+    <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
 
 </resources>

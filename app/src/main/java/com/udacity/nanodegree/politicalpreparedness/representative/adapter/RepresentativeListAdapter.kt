@@ -28,6 +28,20 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewH
 }
 
 class RepresentativeViewHolder(val binding: ItemViewRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(item: Representative) {
+        binding.representative = item
+        binding.representativePhoto.setImageResource(R.drawable.ic_profile)
+
+        binding.representative?.official?.urls?.let { showWWWLinks(it) }
+        //Showing social links ** Hint: Use provided helper methods
+        //Showing www link ** Hint: Use provided helper methods
+        binding.representative?.official?.channels?.let { showSocialLinks(it) }
+
+        binding.executePendingBindings()
+    }
+
+    //Added companion object to inflate ViewHolder (from)
     companion object {
         fun from(parent: ViewGroup): RepresentativeViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,18 +50,6 @@ class RepresentativeViewHolder(val binding: ItemViewRepresentativeBinding): Recy
             return RepresentativeViewHolder(binding)
         }
     }
-
-    fun bind(item: Representative) {
-        binding.representative = item
-        binding.representativePhoto.setImageResource(R.drawable.ic_profile)
-
-        //TODO: Show social links ** Hint: Use provided helper methods
-        //TODO: Show www link ** Hint: Use provided helper methods
-
-        binding.executePendingBindings()
-    }
-
-    //TODO: Add companion object to inflate ViewHolder (from)
 
     private fun showSocialLinks(channels: List<Channel>) {
         val facebookUrl = getFacebookUrl(channels)

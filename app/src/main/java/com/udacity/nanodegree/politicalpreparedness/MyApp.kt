@@ -3,6 +3,7 @@ package com.udacity.nanodegree.politicalpreparedness
 import android.app.Application
 import com.udacity.nanodegree.politicalpreparedness.database.ElectionDatabase
 import com.udacity.nanodegree.politicalpreparedness.election.ElectionsViewModel
+import com.udacity.nanodegree.politicalpreparedness.network.CivicsRepository
 import com.udacity.nanodegree.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,9 +26,9 @@ class MyApp : Application() {
             //Declare singleton definitions to be later injected using by inject()
             single {
                 //This view model is declared singleton to be used across multiple fragments
-                RepresentativeViewModel(get())
+                RepresentativeViewModel(get(), get())
             }
-//            single { Repository(get()) }
+            single { CivicsRepository(get()) }
             single { ElectionDatabase.getInstance(this@MyApp).electionDao }
         }
 
