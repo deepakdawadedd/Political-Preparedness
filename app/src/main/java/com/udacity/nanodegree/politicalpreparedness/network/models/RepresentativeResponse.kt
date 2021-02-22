@@ -1,7 +1,10 @@
 package com.udacity.nanodegree.politicalpreparedness.network.models
 
+import com.squareup.moshi.JsonClass
 import com.udacity.nanodegree.politicalpreparedness.representative.model.Representative
 
+
+@JsonClass(generateAdapter = true)
 data class RepresentativeResponse(
         val offices: List<Office>,
         val officials: List<Official>

@@ -25,7 +25,8 @@ class CivicsRepository(
                     CivicsApi.retrofitService.getRepresentatives(address.toFormattedString())
                 val representatives = response.mapResponseToRepresentatives()
                 Result.Success(representatives)
-            } catch (exception: java.lang.Exception) {
+            } catch (exception: Exception) {
+                exception.printStackTrace()
                 Result.Error("Error getting representatives")
             }
 

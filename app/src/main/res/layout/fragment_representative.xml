@@ -108,7 +108,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin_small"
-            android:onClick="@{() -> viewModel.getRepresentatives()}"
+            android:onClick="@{() -> viewModel.fetchRepresentatives()}"
             android:text="@string/representative_fragment_find_my_representatives"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +170,7 @@
 
         <ProgressBar
             android:id="@+id/representative_fragment_progress"
-            toggleVisibility="@{viewModel.showLoading]"
+            toggleVisibility="@{viewModel.showLoading}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

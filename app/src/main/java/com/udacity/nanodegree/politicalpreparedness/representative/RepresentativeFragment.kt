@@ -12,8 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.content.PermissionChecker
-import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.udacity.nanodegree.politicalpreparedness.R
@@ -21,6 +22,7 @@ import com.udacity.nanodegree.politicalpreparedness.base.BaseFragment
 import com.udacity.nanodegree.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.udacity.nanodegree.politicalpreparedness.network.models.Address
 import com.udacity.nanodegree.politicalpreparedness.representative.adapter.RepresentativeListAdapter
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class RepresentativeFragment : BaseFragment() {
@@ -33,7 +35,7 @@ class RepresentativeFragment : BaseFragment() {
     }
 
     //Declared ViewModel
-    override val viewModel: RepresentativeViewModel by viewModels()
+    override val viewModel: RepresentativeViewModel by inject()
 
     private var binding: FragmentRepresentativeBinding? = null
 
@@ -54,13 +56,35 @@ class RepresentativeFragment : BaseFragment() {
 
         //Established bindings
         binding = FragmentRepresentativeBinding.inflate(layoutInflater, container, false)
+        binding?.viewModel = viewModel
         //Defined and assign Representative adapter
         val listAdapter = RepresentativeListAdapter()
         binding?.representativeFragmentMyRepresentativesList?.adapter = listAdapter
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.states,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding?.representativeFragmentSelectorState?.adapter = adapter
+        }
 
+        binding?.representativeFragmentSelectorState?.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
+                    (parent?.getItemAtPosition(position) as String?)?.let { state ->
+                        viewModel.state.value = state
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
         //Populated Representative adapter
         viewModel.representatives.observe(viewLifecycleOwner, { representatives ->
             representatives?.apply {
+                hideKeyboard()
                 listAdapter.submitList(representatives)
             }
         })
@@ -81,12 +105,12 @@ class RepresentativeFragment : BaseFragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //TODO: Handle location permission result to get location on permission granted
+        //Handled location permission result to get location on permission granted
 
-        if (requestCode == REQUEST_CODE_LOCATION && grantResults.contains(PackageManager.PERMISSION_DENIED))
+        if (requestCode == REQUEST_CODE_LOCATION)
+            if (grantResults.contains(PackageManager.PERMISSION_DENIED))
                 viewModel.showSnackBarInt.value = R.string.permission_denied_explanation
-            else
-                getLocation()
+            else getLocation()
 
     }
 

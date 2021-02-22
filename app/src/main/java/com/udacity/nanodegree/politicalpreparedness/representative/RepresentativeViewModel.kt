@@ -29,7 +29,7 @@ class RepresentativeViewModel(
     val zip = MutableLiveData<String>()
 
     //Created function to fetch representatives from API from a provided address
-    fun getRepresentativesFromAddress(address: Address) {
+    private fun getRepresentativesFromAddress(address: Address) {
         viewModelScope.launch {
             showLoading.value = true
             val result = repository.getRepresentatives(address)
@@ -41,7 +41,7 @@ class RepresentativeViewModel(
                     showNoData.postValue(data.isEmpty())
                 }
                 is Result.Error -> {
-                    showSnackBar.value = app.getString(R.string.error_getting_representative)
+                    showSnackBar.value = result.message
                     showLoading.value = false
                 }
             }
@@ -72,7 +72,7 @@ class RepresentativeViewModel(
     }
 
     //Created function to get address from individual fields
-    fun getRepresentatives() {
+    fun fetchRepresentatives() {
         val addressLine1 = addressLine1.value ?: kotlin.run {
             showSnackBarInt.value = R.string.error_enter_address_line1
             return

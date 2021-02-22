@@ -16,6 +16,6 @@ abstract class BaseViewModel(protected val app: Application) : AndroidViewModel(
     val showSnackBarInt: SingleLiveEvent<Int> = SingleLiveEvent()
     val showToast: SingleLiveEvent<String> = SingleLiveEvent()
     val showLoading: SingleLiveEvent<Boolean> = SingleLiveEvent()
-    val showNoData: MutableLiveData<Boolean> = MutableLiveData()
+    val showNoData: MutableLiveData<Boolean> = MutableLiveData(false)
 
 }

@@ -3,6 +3,7 @@ package com.udacity.nanodegree.politicalpreparedness
 import android.app.Application
 import com.udacity.nanodegree.politicalpreparedness.database.ElectionDatabase
 import com.udacity.nanodegree.politicalpreparedness.election.ElectionsViewModel
+import com.udacity.nanodegree.politicalpreparedness.network.CivicsDataSource
 import com.udacity.nanodegree.politicalpreparedness.network.CivicsRepository
 import com.udacity.nanodegree.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
@@ -19,15 +20,8 @@ class MyApp : Application() {
          * use Koin Library as a service locator
          */
         val module = module {
-            //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
-            viewModel {
-                ElectionsViewModel()
-            }
-            //Declare singleton definitions to be later injected using by inject()
-            single {
-                //This view model is declared singleton to be used across multiple fragments
-                RepresentativeViewModel(get(), get())
-            }
+            viewModel { ElectionsViewModel() }
+            viewModel { RepresentativeViewModel(get(), get()) }
             single { CivicsRepository(get()) }
             single { ElectionDatabase.getInstance(this@MyApp).electionDao }
         }
