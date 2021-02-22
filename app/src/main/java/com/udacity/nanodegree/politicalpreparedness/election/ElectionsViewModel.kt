@@ -10,16 +10,18 @@ import com.udacity.nanodegree.politicalpreparedness.network.models.Election
 import kotlinx.coroutines.launch
 
 //TODO: Construct ViewModel and provide election datasource
-class ElectionsViewModel(app: Application, private val repository: CivicsRepository) :
-    BaseViewModel(app) {
+class ElectionsViewModel(
+    app: Application,
+    private val repository: CivicsRepository
+) : BaseViewModel(app) {
 
     //Created live data val for upcoming elections
     val upcomingElections: LiveData<List<Election>>
-            get() = repository.electionsUpcoming
+        get() = repository.electionsUpcoming
 
     //Created live data val for saved elections
     val followedElections: LiveData<List<Election>>
-            get() = repository.electionsFollowed
+        get() = repository.electionsFollowed
 
     //Created val and functions to populate live data for upcoming elections from the API and saved elections from local database
     private fun refreshElections() {
@@ -37,6 +39,7 @@ class ElectionsViewModel(app: Application, private val repository: CivicsReposit
             )
         )
     }
+
     init {
         refreshElections()
     }

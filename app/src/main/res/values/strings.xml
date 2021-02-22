@@ -25,5 +25,11 @@
     <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
     <string name="election_upcoming_header">Upcoming Elections</string>
     <string name="election_followed_header">Followed Elections</string>
-
+    <string name="voter_info_election_information">Election Information</string>
+    <string name="voter_info_state_locations">Voting Locations</string>
+    <string name="voter_info_state_ballot">Ballot Information</string>
+    <string name="voter_info_follow_election">Follow election</string>
+    <string name="voter_info_un_follow_election">Unfollow election</string>
+    <string name="correspondence_header">Correspondence Address:</string>
+    <string name="can_not_open_url">Can not open browser</string>
 </resources>

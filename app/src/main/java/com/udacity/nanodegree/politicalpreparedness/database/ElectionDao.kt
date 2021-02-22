@@ -16,7 +16,7 @@ interface ElectionDao {
 
     //Added select single election query
     @Query("SELECT * FROM election_table WHERE id = :id")
-    fun getElectionById(id: Int): LiveData<Election>
+    suspend fun getElectionById(id: Int): Election
 
     //Added delete query
     @Delete

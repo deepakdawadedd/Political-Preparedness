@@ -19,7 +19,7 @@ interface CivicsDataSource {
     suspend fun getRepresentatives(address: Address): Result<List<Representative>>
     suspend fun refreshElectionsData()
     suspend fun updateElection(election: Election)
-    fun getElectionById(id: Int): LiveData<Election>
+    suspend fun getElectionById(id: Int): Election
     suspend fun deleteElection(election: Election)
     suspend fun clear()
     suspend fun getVoterInfo(election: Election): Result<VoterInfoResponse>

@@ -57,7 +57,7 @@ class CivicsRepository(
 
     }
 
-    override fun getElectionById(id: Int): LiveData<Election> = electionDao.getElectionById(id)
+    override suspend fun getElectionById(id: Int): Election = electionDao.getElectionById(id)
 
     override suspend fun deleteElection(election: Election) = withContext(ioDispatcher) {
         try {
