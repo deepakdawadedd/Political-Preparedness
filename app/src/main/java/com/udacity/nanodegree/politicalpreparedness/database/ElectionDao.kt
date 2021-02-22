@@ -1,21 +1,36 @@
 package com.udacity.nanodegree.politicalpreparedness.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import com.udacity.nanodegree.politicalpreparedness.network.models.Election
 
 @Dao
 interface ElectionDao {
+    //Added insert query
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(vararg election: Election)
 
-    //TODO: Add insert query
+    //Added select all election query
+    @Query("SELECT * FROM election_table")
+    fun getAllElections(): LiveData<List<Election>>
 
-    //TODO: Add select all election query
+    //Added select single election query
+    @Query("SELECT * FROM election_table WHERE id = :id")
+    fun getElectionById(id: Int): LiveData<Election>
 
-    //TODO: Add select single election query
+    //Added delete query
+    @Delete
+    suspend fun deleteElection(election: Election)
 
-    //TODO: Add delete query
+    //Added clear query
+    @Query("DELETE FROM election_table")
+    suspend fun clear()
 
-    //TODO: Add clear query
+    @Update
+    suspend fun updateElection(election: Election)
+
+    @Query("SELECT * FROM election_table WHERE isFollowed = 1")
+    fun getFollowedElections(): LiveData<List<Election>>
+
 
 }

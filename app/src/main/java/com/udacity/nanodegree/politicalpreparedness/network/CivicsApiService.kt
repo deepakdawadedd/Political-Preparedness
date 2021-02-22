@@ -5,7 +5,9 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.nanodegree.politicalpreparedness.network.jsonadapter.ElectionAdapter
+import com.udacity.nanodegree.politicalpreparedness.network.models.ElectionResponse
 import com.udacity.nanodegree.politicalpreparedness.network.models.RepresentativeResponse
+import com.udacity.nanodegree.politicalpreparedness.network.models.VoterInfoResponse
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -34,8 +36,16 @@ private val retrofit = Retrofit.Builder()
 
 interface CivicsApiService {
     //TODO: Add elections API Call
+    @GET("elections")
+    suspend fun getElections(): ElectionResponse
 
     //TODO: Add voterinfo API Call
+
+    @GET("voterinfo")
+    suspend fun getVoterInfo(
+        @Query("address") address: String,
+        @Query("electionId") electionId: Int
+    ): VoterInfoResponse
 
     //Added representatives API Call
     @GET("representatives")

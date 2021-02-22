@@ -1,16 +1,44 @@
 package com.udacity.nanodegree.politicalpreparedness.election
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import com.udacity.nanodegree.politicalpreparedness.base.BaseViewModel
+import com.udacity.nanodegree.politicalpreparedness.base.NavigationCommand
+import com.udacity.nanodegree.politicalpreparedness.network.CivicsRepository
+import com.udacity.nanodegree.politicalpreparedness.network.models.Election
+import kotlinx.coroutines.launch
 
 //TODO: Construct ViewModel and provide election datasource
-class ElectionsViewModel: ViewModel() {
+class ElectionsViewModel(app: Application, private val repository: CivicsRepository) :
+    BaseViewModel(app) {
 
-    //TODO: Create live data val for upcoming elections
+    //Created live data val for upcoming elections
+    val upcomingElections: LiveData<List<Election>>
+            get() = repository.electionsUpcoming
 
-    //TODO: Create live data val for saved elections
+    //Created live data val for saved elections
+    val followedElections: LiveData<List<Election>>
+            get() = repository.electionsFollowed
 
-    //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
+    //Created val and functions to populate live data for upcoming elections from the API and saved elections from local database
+    private fun refreshElections() {
+        viewModelScope.launch {
+            repository.refreshElectionsData()
+        }
+    }
 
-    //TODO: Create functions to navigate to saved or upcoming election voter info
+    //Created functions to navigate to saved or upcoming election voter info
+    fun navigateToVoterInfo(election: Election) {
+        navigationCommand.value = NavigationCommand.To(
+            ElectionsFragmentDirections.toVoterInfoFragment(
+                election.id,
+                election.division
+            )
+        )
+    }
+    init {
+        refreshElections()
+    }
 
 }

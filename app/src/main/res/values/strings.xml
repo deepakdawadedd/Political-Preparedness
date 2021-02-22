@@ -23,5 +23,7 @@
     <string name="error_enter_zip">Enter zip</string>
     <string name="error_can_not_find_representative_for_location">Cannot find representatives at this location</string>
     <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
+    <string name="election_upcoming_header">Upcoming Elections</string>
+    <string name="election_followed_header">Followed Elections</string>
 
 </resources>

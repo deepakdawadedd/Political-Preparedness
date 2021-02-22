@@ -40,6 +40,10 @@
         android:id="@+id/electionsFragment"
         android:name="com.udacity.nanodegree.politicalpreparedness.election.ElectionsFragment"
         android:label="fragment_elections"
-        tools:layout="@layout/fragment_election" />
+        tools:layout="@layout/fragment_election" >
+        <action
+            android:id="@+id/to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment" />
+    </fragment>
 
 </navigation>

@@ -3,7 +3,6 @@ package com.udacity.nanodegree.politicalpreparedness
 import android.app.Application
 import com.udacity.nanodegree.politicalpreparedness.database.ElectionDatabase
 import com.udacity.nanodegree.politicalpreparedness.election.ElectionsViewModel
-import com.udacity.nanodegree.politicalpreparedness.network.CivicsDataSource
 import com.udacity.nanodegree.politicalpreparedness.network.CivicsRepository
 import com.udacity.nanodegree.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +19,7 @@ class MyApp : Application() {
          * use Koin Library as a service locator
          */
         val module = module {
-            viewModel { ElectionsViewModel() }
+            viewModel { ElectionsViewModel(get(), get()) }
             viewModel { RepresentativeViewModel(get(), get()) }
             single { CivicsRepository(get()) }
             single { ElectionDatabase.getInstance(this@MyApp).electionDao }
