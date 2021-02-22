@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ConstraintSet android:id="@+id/start" />
-
-    <ConstraintSet android:id="@+id/end" />
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start"
-        />
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:moveWhenScrollAtTop="true"
+            motion:touchAnchorId="@id/representative_fragment_my_representatives_list" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/representative_fragment_progress"
+            motion:visibilityMode="ignore"
+            />
+        <Constraint
+            android:id="@+id/representative_fragment_my_representative_empty_placeholder"
+            motion:visibilityMode="ignore"
+            />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/representative_fragment_progress"
+            motion:visibilityMode="ignore"
+            />
+        <Constraint
+            android:id="@+id/representative_fragment_my_representative_empty_placeholder"
+            motion:visibilityMode="ignore"
+            />
+
+        <Constraint
+            android:id="@+id/representative_fragment_search_title"
+            android:visibility="gone"/>
+
+        <Constraint
+            android:id="@+id/representative_fragment_input_address_line_1"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_input_address_line_2"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_input_city"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_selector_state"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_input_zip_code"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_action_find_my_representatives"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_action_use_my_location"
+            android:visibility="gone"/>
+        <Constraint
+            android:id="@+id/representative_fragment_my_representative_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_small"
+            android:text="@string/representative_fragment_my_representative_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
 </MotionScene>

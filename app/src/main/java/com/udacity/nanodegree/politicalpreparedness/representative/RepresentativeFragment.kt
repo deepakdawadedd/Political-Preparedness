@@ -57,6 +57,7 @@ class RepresentativeFragment : BaseFragment() {
         //Established bindings
         binding = FragmentRepresentativeBinding.inflate(layoutInflater, container, false)
         binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         //Defined and assign Representative adapter
         val listAdapter = RepresentativeListAdapter()
         binding?.representativeFragmentMyRepresentativesList?.adapter = listAdapter

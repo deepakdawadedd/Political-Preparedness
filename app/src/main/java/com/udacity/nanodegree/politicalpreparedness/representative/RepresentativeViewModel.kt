@@ -27,7 +27,10 @@ class RepresentativeViewModel(
     val city = MutableLiveData<String>()
     val state = MutableLiveData<String>()
     val zip = MutableLiveData<String>()
-
+    init {
+        showNoData.value = false
+        showLoading.value = false
+    }
     //Created function to fetch representatives from API from a provided address
     private fun getRepresentativesFromAddress(address: Address) {
         viewModelScope.launch {
@@ -43,6 +46,8 @@ class RepresentativeViewModel(
                 is Result.Error -> {
                     showSnackBar.value = result.message
                     showLoading.value = false
+                    _representatives.postValue(emptyList())
+                    showNoData.postValue(true)
                 }
             }
 
